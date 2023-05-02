@@ -1,6 +1,6 @@
-# ASE-PROJECT
+
 PREDICTING AFTER EFFECTS DUE TO CRISIS
-ASE PROJECT ReadMe
+
 
 You can access the Project Repositry using the link - https://predicting-crisis.my.canva.site/
 
