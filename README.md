@@ -4,7 +4,7 @@ ASE PROJECT ReadMe
 
 1) DOWNLOAD THE PROJECT FROM GITHUB REPOSITORY - https://github.com/Naveenkuupireddy/ASE-PROJECT
 
-2) Download the DATASETS FILE FROM THE DRIVE LINK -
+2) Download the DATASETS FILE FROM THE DRIVE LINK - https://tamucc-my.sharepoint.com/:f:/r/personal/nkuppireddy_islander_tamucc_edu/Documents/Crisis%20prediction%20Datasets?csf=1&web=1&e=WLT12R
 
 3)Open Google Colab using following link - https://colab.research.google.com/
 
