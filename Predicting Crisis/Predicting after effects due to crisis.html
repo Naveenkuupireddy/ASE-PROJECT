@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base href="/">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Predicting after effects due to crisis</title>
+        <meta name="description" content="Predicting after effects due to crisis using deep learning models"/>
+        <link rel="icon" href="26387fa4f5b1e3f7b6217b27d79bf264.png" type="image/png" sizes="16x16">
+        <link rel="icon" href="2d0b56e7e51cf11036ad8734bdb67e2d.png" type="image/png" sizes="32x32">
+        <link rel="apple-touch-icon" href="725b756a69a7d4c235070e51acd85560.png" sizes="180x180">
+        <style>
+            :root {
+                --ffsd: 0px;
+                --1vw: calc((100vw - var(--sbw, 0px)) / 100);
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                .animated {
+                    animation: none !important;
+                }
+            }
+
+            html {
+                zoom: var(--rzf, 1); font-size: max(calc(min(var(--1vw, 1vw), 13.66px) * var(--rfso, 1)), var(--minfs, 0px));
+                -webkit-text-size-adjust: 100%;
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-size: calc(1rem * var(--bfso, 1));
+            }
+
+            body, html, p, ul, ol, li {
+                margin: 0;
+                padding: 0;
+                font-synthesis: none;
+                font-kerning: none;
+                font-variant-ligatures: none;
+                font-feature-settings: "kern" 0, "calt" 0, "liga" 0, "clig" 0, "dlig" 0, "hlig" 0;
+                font-family: unset;
+                -webkit-font-smoothing: subpixel-antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: geometricprecision;
+                white-space: normal;
+            }
+
+            li {
+                text-align: unset;
+            }
+
+            a {
+                text-decoration: none;
+                color: inherit;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/fcc7b8c7fad442649ca552dce8f94418.woff2);
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/7011f0066d6763da5cca149720035c7f.woff2);
+                font-weight: 700;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/e6d582177fe4437cb7cf52d427c2820e.woff2);
+                font-weight: 400;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/c4aa29e7d5a1a461026538590ae2f1bd.woff2);
+                font-weight: 700;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/fcc7b8c7fad442649ca552dce8f94418.woff2);
+                font-weight: 100;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/e6d582177fe4437cb7cf52d427c2820e.woff2);
+                font-weight: 100;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/fcc7b8c7fad442649ca552dce8f94418.woff2);
+                font-weight: 200;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/e6d582177fe4437cb7cf52d427c2820e.woff2);
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/fcc7b8c7fad442649ca552dce8f94418.woff2);
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/e6d582177fe4437cb7cf52d427c2820e.woff2);
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/fcc7b8c7fad442649ca552dce8f94418.woff2);
+                font-weight: 500;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/e6d582177fe4437cb7cf52d427c2820e.woff2);
+                font-weight: 500;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/7011f0066d6763da5cca149720035c7f.woff2);
+                font-weight: 600;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/c4aa29e7d5a1a461026538590ae2f1bd.woff2);
+                font-weight: 600;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/7011f0066d6763da5cca149720035c7f.woff2);
+                font-weight: 800;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/c4aa29e7d5a1a461026538590ae2f1bd.woff2);
+                font-weight: 800;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/7011f0066d6763da5cca149720035c7f.woff2);
+                font-weight: 900;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YAEnTBpkzlo-0;
+                src: url(fonts/c4aa29e7d5a1a461026538590ae2f1bd.woff2);
+                font-weight: 900;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/f8f199f09526f79e87644ed227e0f651.woff2);
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/98c4d2c0223fc8474641c77f923528e9.woff2);
+                font-weight: 700;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/d257a7100844bc3f98c9021168b6249e.woff2);
+                font-weight: 400;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/1060345c54d396e76d73f1da7ee200bd.woff2);
+                font-weight: 700;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/f8f199f09526f79e87644ed227e0f651.woff2);
+                font-weight: 100;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/d257a7100844bc3f98c9021168b6249e.woff2);
+                font-weight: 100;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/f8f199f09526f79e87644ed227e0f651.woff2);
+                font-weight: 200;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/d257a7100844bc3f98c9021168b6249e.woff2);
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/f8f199f09526f79e87644ed227e0f651.woff2);
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/d257a7100844bc3f98c9021168b6249e.woff2);
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/f8f199f09526f79e87644ed227e0f651.woff2);
+                font-weight: 500;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/d257a7100844bc3f98c9021168b6249e.woff2);
+                font-weight: 500;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/98c4d2c0223fc8474641c77f923528e9.woff2);
+                font-weight: 600;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/1060345c54d396e76d73f1da7ee200bd.woff2);
+                font-weight: 600;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/98c4d2c0223fc8474641c77f923528e9.woff2);
+                font-weight: 800;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/1060345c54d396e76d73f1da7ee200bd.woff2);
+                font-weight: 800;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/98c4d2c0223fc8474641c77f923528e9.woff2);
+                font-weight: 900;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: YACgEZ1cb1Q-0;
+                src: url(fonts/1060345c54d396e76d73f1da7ee200bd.woff2);
+                font-weight: 900;
+                font-style: italic;
+            }
+
+            @media (max-width: 375px) {
+                #bgmain {
+                    position: relative;
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                #bgmain1 {
+                    grid-template-columns: 0 249.12836726%;
+                    left: -74.56418363%;
+                    grid-template-rows: 0 100%;
+                }
+
+                #RoF6hFROTmQQk2gw {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(6.27950933em - var(--ffsd)));
+                }
+
+                #FOiS5HDAform1G0H {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(6.27949867em - var(--ffsd)));
+                }
+
+                #I5Ox4Cflf40vtMkN {
+                    transform: translateX(0);
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 6.27950933em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 6.27949867em) * 0.075);
+                }
+
+                #fRw8tLoxah3T1w6g {
+                    min-width: 91.6rem;
+                }
+
+                #ApoH5k1LH89NXsCw {
+                    margin-left: 0%;
+                    margin-top: 0%;
+                    position: relative;
+                    margin-bottom: 0%;
+                    grid-area: 2 / 3 / 3 / 8;
+                    margin-right: -10.87172681%;
+                }
+
+                #arrowmain {
+                    position: relative;
+                    grid-area: 4 / 5 / 6 / 7;
+                }
+
+                #gitlink3 {
+                    position: relative;
+                    grid-area: 2 / 2 / 5 / 5;
+                }
+
+                #G8iTeX6c8bE5SaDR {
+                    font-size: max(0px, calc(5.62367231em - var(--ffsd)));
+                }
+
+                #link3 {
+                    transform: translateX(calc(max(0px, 5.62367231em) * -0.01));
+                    margin-top: calc(max(0px, 5.62367231em) * 0.075);
+                    margin-bottom: calc(max(0px, 5.62367231em) * 0.075);
+                }
+
+                #link2 {
+                    min-width: 37.88029649rem;
+                }
+
+                #link1 {
+                    position: relative;
+                    grid-area: 3 / 3 / 4 / 4;
+                }
+
+                #gitlink2 {
+                    grid-template-columns: 0 5.55590247rem 37.74696316rem 5.55590247rem;
+                    grid-template-rows: 0 minmax(4.80528311rem, max-content) minmax(6.67378847rem, max-content) minmax(4.27806631rem, max-content);
+                }
+
+                #gitlink1 {
+                    grid-template-columns: 0 48.85876811rem;
+                    grid-template-rows: 0 minmax(15.75713789rem, max-content);
+                    grid-area: 5 / 2 / 7 / 6;
+                }
+
+                #gitmain {
+                    position: relative;
+                    grid-area: 5 / 2 / 7 / 6;
+                }
+
+                #qoute4 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(5.22796089em - var(--ffsd)));
+                }
+
+                #qoute2 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(5.22796089em - var(--ffsd)));
+                }
+
+                #qoute_1 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(5.22796089em - var(--ffsd)));
+                }
+
+                #qoute5 {
+                    transform: translateX(calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 5.22796089em) * -0.01));
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 5.22796089em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 5.22796089em) * 0.075);
+                }
+
+                #qoute6 {
+                    min-width: 91.6rem;
+                }
+
+                #qoutemain {
+                    position: relative;
+                    grid-area: 8 / 4 / 9 / 9;
+                }
+
+                #C6fILFS4xBOOiweq {
+                    grid-template-columns: 4.26666667rem 0 0 46.79820107rem 2.06056703rem 39.73273421rem 2.87516435rem 0 4.26666667rem;
+                    grid-template-rows: minmax(10.19245526rem, max-content) minmax(8.91323385rem, max-content) minmax(15.87042365rem, max-content) minmax(31.36687144rem, max-content) minmax(8.92786522rem, max-content) minmax(6.82927267rem, max-content) minmax(35.83759486rem, max-content) minmax(11.93614264rem, max-content) minmax(10.19245526rem, max-content);
+                }
+
+                #home {
+                    min-height: 100vh;
+                }
+            }
+
+            @media (min-width: 375.05px) and (max-width: 480px) {
+                #bgmain {
+                    position: relative;
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                #bgmain1 {
+                    grid-template-columns: 0 224.82228946%;
+                    left: -62.41114473%;
+                    grid-template-rows: 0 100%;
+                }
+
+                #RoF6hFROTmQQk2gw {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.90586667em - var(--ffsd)));
+                }
+
+                #FOiS5HDAform1G0H {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.90585833em - var(--ffsd)));
+                }
+
+                #I5Ox4Cflf40vtMkN {
+                    transform: translateX(0);
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.90586667em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.90585833em) * 0.075);
+                }
+
+                #fRw8tLoxah3T1w6g {
+                    min-width: 93.4375rem;
+                }
+
+                #ApoH5k1LH89NXsCw {
+                    margin-left: 0%;
+                    margin-top: 0%;
+                    position: relative;
+                    margin-bottom: 0%;
+                    grid-area: 2 / 3 / 3 / 8;
+                    margin-right: -10.87172681%;
+                }
+
+                #arrowmain {
+                    position: relative;
+                    grid-area: 4 / 5 / 6 / 7;
+                }
+
+                #gitlink3 {
+                    position: relative;
+                    grid-area: 2 / 2 / 5 / 5;
+                }
+
+                #G8iTeX6c8bE5SaDR {
+                    font-size: max(0px, calc(5.73844113em - var(--ffsd)));
+                }
+
+                #link3 {
+                    transform: translateX(calc(max(0px, 5.73844113em) * -0.01));
+                    margin-top: calc(max(0px, 5.73844113em) * 0.075);
+                    margin-bottom: calc(max(0px, 5.73844113em) * 0.075);
+                }
+
+                #link2 {
+                    min-width: 38.62147601rem;
+                }
+
+                #link1 {
+                    position: relative;
+                    grid-area: 3 / 3 / 4 / 4;
+                }
+
+                #gitlink2 {
+                    grid-template-columns: 0 5.66928824rem 38.51730934rem 5.66928824rem;
+                    grid-template-rows: 0 minmax(4.90335011rem, max-content) minmax(6.80998824rem, max-content) minmax(4.36537378rem, max-content);
+                }
+
+                #gitlink1 {
+                    grid-template-columns: 0 49.85588582rem;
+                    grid-template-rows: 0 minmax(16.07871213rem, max-content);
+                    grid-area: 5 / 2 / 7 / 6;
+                }
+
+                #gitmain {
+                    position: relative;
+                    grid-area: 5 / 2 / 7 / 6;
+                }
+
+                #qoute4 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.08434444em - var(--ffsd)));
+                }
+
+                #qoute2 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.08434444em - var(--ffsd)));
+                }
+
+                #qoute_1 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.08434444em - var(--ffsd)));
+                }
+
+                #qoute5 {
+                    transform: translateX(calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.08434444em) * -0.01));
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.08434444em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.08434444em) * 0.075);
+                }
+
+                #qoute6 {
+                    min-width: 93.4375rem;
+                }
+
+                #qoutemain {
+                    position: relative;
+                    grid-area: 8 / 4 / 9 / 9;
+                }
+
+                #C6fILFS4xBOOiweq {
+                    grid-template-columns: 3.33333333rem 0 0 47.7532664rem 2.10261942rem 40.54360634rem 2.93384117rem 0 3.33333333rem;
+                    grid-template-rows: minmax(7.96285567rem, max-content) minmax(9.09513658rem, max-content) minmax(13.11638858rem, max-content) minmax(32.00701167rem, max-content) minmax(9.11006655rem, max-content) minmax(6.96864558rem, max-content) minmax(27.99812098rem, max-content) minmax(12.17973738rem, max-content) minmax(7.96285567rem, max-content);
+                }
+
+                #home {
+                    min-height: 100vh;
+                }
+            }
+
+            @media (min-width: 480.05px) and (max-width: 768px) {
+                #bgmain {
+                    position: relative;
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                #bgmain1 {
+                    grid-template-columns: 0 160.60851415%;
+                    left: -30.30425708%;
+                    grid-template-rows: 0 100%;
+                }
+
+                #RoF6hFROTmQQk2gw {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(3.99839484em - var(--ffsd)));
+                }
+
+                #FOiS5HDAform1G0H {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(3.99837996em - var(--ffsd)));
+                }
+
+                #I5Ox4Cflf40vtMkN {
+                    transform: translateX(0);
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 3.99839484em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 3.99837996em) * 0.075);
+                }
+
+                #fRw8tLoxah3T1w6g {
+                    min-width: 91.73177083rem;
+                }
+
+                #ApoH5k1LH89NXsCw {
+                    margin-left: 0%;
+                    margin-top: 0%;
+                    position: relative;
+                    margin-bottom: 0%;
+                    grid-area: 2 / 2 / 3 / 8;
+                    margin-right: -10.87172681%;
+                }
+
+                #arrowmain {
+                    position: relative;
+                    grid-area: 4 / 5 / 6 / 7;
+                }
+
+                #gitlink3 {
+                    position: relative;
+                    grid-area: 2 / 2 / 5 / 5;
+                }
+
+                #G8iTeX6c8bE5SaDR {
+                    font-size: max(0px, calc(3.76785156em - var(--ffsd)));
+                }
+
+                #link3 {
+                    transform: translateX(calc(max(0px, 3.76785156em) * -0.01));
+                    margin-top: calc(max(0px, 3.76785156em) * 0.075);
+                    margin-bottom: calc(max(0px, 3.76785156em) * 0.075);
+                }
+
+                #link2 {
+                    min-width: 25.35550985rem;
+                }
+
+                #link1 {
+                    position: relative;
+                    grid-area: 3 / 3 / 4 / 4;
+                }
+
+                #gitlink2 {
+                    grid-template-columns: 0 3.72244588rem 25.29040569rem 3.72244588rem;
+                    grid-template-rows: 0 minmax(3.21953209rem, max-content) minmax(4.47142773rem, max-content) minmax(2.86629767rem, max-content);
+                }
+
+                #gitlink1 {
+                    grid-template-columns: 0 32.73529745rem;
+                    grid-template-rows: 0 minmax(10.5572575rem, max-content);
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #gitmain {
+                    position: relative;
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #qoute4 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.77022044em - var(--ffsd)));
+                }
+
+                #qoute2 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.77022044em - var(--ffsd)));
+                }
+
+                #qoute_1 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.77022044em - var(--ffsd)));
+                }
+
+                #qoute5 {
+                    transform: translateX(calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.77022044em) * -0.01));
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.77022044em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.77022044em) * 0.075);
+                }
+
+                #qoute6 {
+                    min-width: 91.73177083rem;
+                }
+
+                #qoutemain {
+                    position: relative;
+                    grid-area: 8 / 3 / 9 / 9;
+                }
+
+                #C6fILFS4xBOOiweq {
+                    grid-template-columns: 4.16666667rem 0 15.13846369rem 31.35472079rem 1.38057666rem 26.62086916rem 17.17203638rem 0 4.16666667rem;
+                    grid-template-rows: minmax(6.01845146rem, max-content) minmax(8.93272342rem, max-content) minmax(8.29449245rem, max-content) minmax(21.01575431rem, max-content) minmax(5.98165559rem, max-content) minmax(4.5756019rem, max-content) minmax(17.49882561rem, max-content) minmax(11.96224207rem, max-content) minmax(6.01845146rem, max-content);
+                }
+
+                #home {
+                    min-height: 100vh;
+                }
+            }
+
+            @media (min-width: 768.05px) and (max-width: 1024px) {
+                #bgmain {
+                    position: relative;
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                #bgmain1 {
+                    grid-template-columns: 0 130.5922247%;
+                    left: -15.29611235%;
+                    grid-template-rows: 0 100%;
+                }
+
+                #RoF6hFROTmQQk2gw {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.08926745em - var(--ffsd)));
+                }
+
+                #FOiS5HDAform1G0H {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(4.08925223em - var(--ffsd)));
+                }
+
+                #I5Ox4Cflf40vtMkN {
+                    transform: translateX(0);
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.08926745em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 4.08925223em) * 0.075);
+                }
+
+                #fRw8tLoxah3T1w6g {
+                    min-width: 93.79882812rem;
+                }
+
+                #ApoH5k1LH89NXsCw {
+                    margin-left: 0%;
+                    margin-top: 0%;
+                    position: relative;
+                    margin-bottom: 0%;
+                    grid-area: 2 / 2 / 3 / 8;
+                    margin-right: -10.87172681%;
+                }
+
+                #arrowmain {
+                    position: relative;
+                    grid-area: 4 / 5 / 6 / 7;
+                }
+
+                #gitlink3 {
+                    position: relative;
+                    grid-area: 2 / 2 / 5 / 5;
+                }
+
+                #G8iTeX6c8bE5SaDR {
+                    font-size: max(0px, calc(2.82588867em - var(--ffsd)));
+                }
+
+                #link3 {
+                    transform: translateX(calc(max(0px, 2.82588867em) * -0.01));
+                    margin-top: calc(max(0px, 2.82588867em) * 0.075);
+                    margin-bottom: calc(max(0px, 2.82588867em) * 0.075);
+                }
+
+                #link2 {
+                    min-width: 19.01663239rem;
+                }
+
+                #link1 {
+                    position: relative;
+                    grid-area: 3 / 3 / 4 / 4;
+                }
+
+                #gitlink2 {
+                    grid-template-columns: 0 2.79183441rem 18.96780426rem 2.79183441rem;
+                    grid-template-rows: 0 minmax(2.41464907rem, max-content) minmax(3.3535708rem, max-content) minmax(2.14972325rem, max-content);
+                }
+
+                #gitlink1 {
+                    grid-template-columns: 0 24.55147309rem;
+                    grid-template-rows: 0 minmax(7.91794312rem, max-content);
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #gitmain {
+                    position: relative;
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #qoute4 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.83318em - var(--ffsd)));
+                }
+
+                #qoute2 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.83318em - var(--ffsd)));
+                }
+
+                #qoute_1 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.83318em - var(--ffsd)));
+                }
+
+                #qoute5 {
+                    transform: translateX(calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.83318em) * -0.01));
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.83318em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.83318em) * 0.075);
+                }
+
+                #qoute6 {
+                    min-width: 93.79882812rem;
+                }
+
+                #qoutemain {
+                    position: relative;
+                    grid-area: 8 / 3 / 9 / 9;
+                }
+
+                #C6fILFS4xBOOiweq {
+                    grid-template-columns: 3.125rem 0 23.80973877rem 23.51604059rem 1.03543249rem 19.96565187rem 25.42313627rem 0 3.125rem;
+                    grid-template-rows: minmax(4.51383859rem, max-content) minmax(9.13573987rem, max-content) minmax(6.22086934rem, max-content) minmax(15.76181574rem, max-content) minmax(4.4862417rem, max-content) minmax(3.43170143rem, max-content) minmax(13.12411921rem, max-content) minmax(12.23411121rem, max-content) minmax(4.51383859rem, max-content);
+                }
+
+                #home {
+                    min-height: 100vh;
+                }
+            }
+
+            @media (min-width: 1024.05px) {
+                #bgmain {
+                    position: relative;
+                    grid-area: 2 / 2 / 3 / 3;
+                }
+
+                #bgmain1 {
+                    grid-template-columns: 0 100%;
+                    grid-template-rows: 0 100%;
+                }
+
+                #RoF6hFROTmQQk2gw {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(3.93417277em - var(--ffsd)));
+                }
+
+                #FOiS5HDAform1G0H {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(3.93415813em - var(--ffsd)));
+                }
+
+                #I5Ox4Cflf40vtMkN {
+                    transform: translateX(0);
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 3.93417277em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 3.93415813em) * 0.075);
+                }
+
+                #fRw8tLoxah3T1w6g {
+                    min-width: 90.23092316rem;
+                }
+
+                #ApoH5k1LH89NXsCw {
+                    margin-left: 0%;
+                    margin-top: 0%;
+                    position: relative;
+                    margin-bottom: 0%;
+                    grid-area: 2 / 3 / 3 / 9;
+                    margin-right: -10.87172681%;
+                }
+
+                #arrowmain {
+                    position: relative;
+                    grid-area: 4 / 5 / 6 / 7;
+                }
+
+                #gitlink3 {
+                    position: relative;
+                    grid-area: 2 / 2 / 5 / 5;
+                }
+
+                #G8iTeX6c8bE5SaDR {
+                    font-size: max(0px, calc(2.11838214em - var(--ffsd)));
+                }
+
+                #link3 {
+                    transform: translateX(calc(max(0px, 2.11838214em) * -0.01));
+                    margin-top: calc(max(0px, 2.11838214em) * 0.075);
+                    margin-bottom: calc(max(0px, 2.11838214em) * 0.075);
+                }
+
+                #link2 {
+                    min-width: 14.25551359rem;
+                }
+
+                #link1 {
+                    position: relative;
+                    grid-area: 3 / 3 / 4 / 4;
+                }
+
+                #gitlink2 {
+                    grid-template-columns: 0 2.09285391rem 14.21891037rem 2.09285391rem;
+                    grid-template-rows: 0 minmax(1.81010296rem, max-content) minmax(2.51395059rem, max-content) minmax(1.61150557rem, max-content);
+                }
+
+                #gitlink1 {
+                    grid-template-columns: 0 18.40461818rem;
+                    grid-template-rows: 0 minmax(5.93555912rem, max-content);
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #gitmain {
+                    position: relative;
+                    grid-area: 5 / 4 / 7 / 6;
+                }
+
+                #qoute4 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.49079551em - var(--ffsd)));
+                }
+
+                #qoute2 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.49079551em - var(--ffsd)));
+                }
+
+                #qoute_1 {
+                    font-size: max(calc(12px * var(--rfso, var(--bfso, 1))), calc(2.49079551em - var(--ffsd)));
+                }
+
+                #qoute5 {
+                    transform: translateX(calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.49079551em) * -0.01));
+                    margin-top: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.49079551em) * 0.075);
+                    margin-bottom: calc(max(calc(12px * var(--rfso, var(--bfso, 1))), 2.49079551em) * 0.075);
+                }
+
+                #qoute6 {
+                    min-width: 82.4570915rem;
+                }
+
+                #qoutemain {
+                    position: relative;
+                    grid-area: 15 / 2 / 9 / 8;
+                }
+
+                #C6fILFS4xBOOiweq {
+                    grid-template-columns: 2.56720828rem 7.23847179rem 27.77151745rem 17.62842282rem 0.77619537rem 14.96693083rem 14.03895003rem 15.01230344rem;
+                    grid-template-rows: minmax(2.83724879rem, max-content) minmax(8.78924634rem, max-content) minmax(4.66337497rem, max-content) minmax(11.81559247rem, max-content) minmax(3.36303916rem, max-content) minmax(2.57251996rem, max-content) minmax(9.83828556rem, max-content) minmax(10.75564181rem, max-content) minmax(1.58759853rem, max-content);
+                }
+
+                #home {
+                    min-height: 100vh;
+                }
+            }
+        </style>
+        <noscript>
+            <style>
+                .animated {
+                    animation-play-state: running !important;
+                }
+
+                @keyframes pulse {
+                }
+            </style>
+        </noscript>
+        <script nonce='192555cd-0d38-4154-8eda-e455b043bbac'>
+            !function() {
+                "use strict";
+                function n(n, t) {
+                    let e = (null == t ? void 0 : t.runOnLoad) ? void 0 : document.documentElement.clientWidth
+                      , o = (null == t ? void 0 : t.runOnLoad) ? void 0 : window.innerHeight;
+                    const r = ()=>{
+                        const r = {
+                            runOnLoad: !1,
+                            runOnWidthChange: !0,
+                            runOnHeightChange: !1,
+                            ...t
+                        }
+                          , i = document.documentElement.clientWidth
+                          , d = window.innerHeight
+                          , c = o !== d;
+                        (e !== i && r.runOnWidthChange || c && r.runOnHeightChange) && n(),
+                        e = i,
+                        o = d
+                    }
+                      , i = function(n, t) {
+                        let e;
+                        return (...o)=>{
+                            clearTimeout(e),
+                            e = setTimeout((()=>{
+                                n(...o)
+                            }
+                            ), t)
+                        }
+                    }(r, 100);
+                    window.addEventListener("resize", i),
+                    (null == t ? void 0 : t.runOnLoad) && ("loading" === document.readyState ? window.addEventListener("DOMContentLoaded", r) : r())
+                }
+                function t(n, t, e=.001) {
+                    return Math.abs(n - t) < e
+                }
+                function e(n, t) {
+                    return window.getComputedStyle(n).getPropertyValue(t)
+                }
+                function o(n, t, e) {
+                    n.style.setProperty(t, e)
+                }
+                function r(n, t) {
+                    const o = document.createElement("div");
+                    o.style.setProperty(n, t),
+                    document.body.append(o);
+                    const r = e(o, n);
+                    return o.remove(),
+                    r
+                }
+                function i() {
+                    const i = function() {
+                        const n = parseFloat(r("font-size", "0.1px"));
+                        return n > 1 ? n : 0
+                    }()
+                      , d = function(n) {
+                        const t = 2 * Math.max(n, 1);
+                        return t / parseFloat(r("font-size", `${t}px`))
+                    }(i);
+                    if (function(t) {
+                        if (0 === t)
+                            return;
+                        o(document.documentElement, "--minfs", `${t}px`),
+                        n((()=>{
+                            const n = 100 * t
+                              , {clientWidth: e} = document.documentElement;
+                            o(document.documentElement, "--rzf", n > e ? (e / n).toPrecision(4) : null)
+                        }
+                        ), {
+                            runOnLoad: !0
+                        })
+                    }(i * Math.max(1, d)),
+                    t(d, 1))
+                        return;
+                    const c = t(parseFloat(e(document.documentElement, "font-size")), parseFloat(r("grid-template-columns", "1rem")));
+                    o(document.documentElement, c ? "--rfso" : "--bfso", d.toPrecision(4))
+                }
+                function d() {
+                    document.querySelectorAll("img, image, video, svg").forEach((n=>n.addEventListener("contextmenu", (n=>n.preventDefault()))))
+                }
+                var c;
+                const u = "undefined" != typeof window ? null === (c = window.navigator) || void 0 === c ? void 0 : c.userAgent : void 0;
+                const a = !(!u || (m = u,
+                !m.match(/AppleWebKit\//) || m.match(/Chrome\//) || m.match(/Chromium\//)));
+                var m;
+                function l() {
+                    document.documentElement.style.setProperty("--ffsd", "0.5px")
+                }
+                function s() {
+                    const n = window.innerWidth - document.documentElement.clientWidth;
+                    var t, e, o;
+                    t = document.documentElement,
+                    e = "--sbw",
+                    o = n >= 0 ? `${n}px` : null,
+                    t.style.setProperty(e, o)
+                }
+                function f() {
+                    document.querySelectorAll("svg").forEach((n=>n.style.background = "url('')"))
+                }
+                function g(n) {
+                    const t = Array.from(n.children);
+                    t.forEach(((n,e)=>{
+                        if (n.hasAttribute("data-foreign-object-container"))
+                            n.style.transformOrigin = "",
+                            n.style.transform = "";
+                        else {
+                            const o = document.createElement("div");
+                            o.setAttribute("data-foreign-object-container", ""),
+                            n.insertAdjacentElement("beforebegin", o),
+                            n.remove(),
+                            o.append(n),
+                            t[e] = o
+                        }
+                    }
+                    ));
+                    const e = n.getScreenCTM();
+                    if (!e)
+                        return;
+                    const {a: o, b: r, c: i, d: d} = e;
+                    t.forEach((n=>{
+                        if (!n.hasAttribute("data-foreign-object-container"))
+                            return;
+                        const {style: t} = n;
+                        t.transformOrigin = "0px 0px",
+                        t.transform = `matrix(${o}, ${r}, ${i}, ${d}, 0, 0)`
+                    }
+                    ))
+                }
+                let h;
+                function v() {
+                    h || (h = Array.from(document.querySelectorAll("foreignObject")).filter((n=>0 === n.getBoundingClientRect().width))),
+                    Array.from(h).forEach(g)
+                }
+                [function() {
+                    a && ("loading" === document.readyState ? window.addEventListener("DOMContentLoaded", l) : l())
+                }
+                , function() {
+                    "loading" === document.readyState ? window.addEventListener("DOMContentLoaded", i) : i()
+                }
+                , function() {
+                    n(s, {
+                        runOnLoad: !0
+                    })
+                }
+                , function() {
+                    a && n(v, {
+                        runOnLoad: !0
+                    })
+                }
+                , function() {
+                    a && ("loading" === document.readyState ? window.addEventListener("DOMContentLoaded", f) : f())
+                }
+                , function() {
+                    "loading" === document.readyState ? window.addEventListener("DOMContentLoaded", d) : d()
+                }
+                ].forEach((n=>n()))
+            }();
+        </script>
+        <script nonce="192555cd-0d38-4154-8eda-e455b043bbac">
+            window.C_CAPTCHA_IMPLEMENTATION = 'RECAPTCHA';
+        </script>
+        <script nonce="192555cd-0d38-4154-8eda-e455b043bbac">
+            window.C_CAPTCHA_KEY = '6Ldk59waAAAAAMPqkICbJjfMivZLCGtTpa6Wn6zO';
+        </script>
+    </head>
+    <body>
+        <div id="root">
+            <section id="home" style="z-index:0;overflow:hidden;grid-template-columns:auto 100rem auto;display:grid;position:relative;align-items:center;">
+                <div id="bgmain1" style="display:grid;min-height:100%;position:absolute;grid-area:1 / 1 / 2 / 4;min-width:100%;">
+                    <div id="bgmain" style="z-index:0;">
+                        <div id="VAupT7hqHRwzVPi5" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="iPSGnsvgx1irQvM2" style="width:100%;opacity:1.0;height:100%;">
+                                <div id="H1ylNVtFUxevpBUE" class="video_container" style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                    <div id="kzZTnNEDbi9o2zPA" style="transform:rotate(0deg);top:-0.35570157%;left:-0.66225166%;width:100.66225166%;position:absolute;height:100.71140315%;opacity:1.0;">
+                                        <video src="videos/bg.jp" playsinline="" poster="videos/bluebgearth.jpg" preload="none" data-volume="0.0" autoplay="" muted="" loop="" style="display:block;object-fit:cover;width:100%;height:100%;"></video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="C6fILFS4xBOOiweq" style="display:grid;position:relative;grid-area:1 / 2 / 2 / 3;">
+                    <div id="ApoH5k1LH89NXsCw" style="z-index:5;">
+                        <div id="fRw8tLoxah3T1w6g" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="I5Ox4Cflf40vtMkN" style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
+                                <p id="RoF6hFROTmQQk2gw" style="color:#000000;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;">
+                                    <span id="rV3cPVmUlXiK9Yvj" style="color:#000000;font-weight:700;">PREDICTING AFTER EFFECTS DUE TO CRISIS</span>
+                                </p>
+                                <p id="FOiS5HDAform1G0H" style="color:#000000;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;">
+                                    <span id="ll5vWQSFrEMMN2LW" style="color:#000000;font-weight:700;">USING DEEP LEARNING MODELS</span>
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="arrowmain" style="z-index:4;">
+                        <div id="arrow1" style="padding-top:96.41434263%;transform:rotate(171.06645886deg);">
+                            <div id="arrow2" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                <div id="arrow3" style="width:100%;opacity:1.0;height:100%;">
+                                    <div id="arrow4" class="video_container" style="transform:scale(1, 1);overflow:hidden;width:100%;position:relative;height:100%;">
+                                        <div id="arrow5" style="transform:rotate(0deg);top:0%;left:0%;width:100%;position:absolute;height:100%;opacity:1.0;">
+                                            <img src="videos/arrow.gif" loading="lazy" style="display:block;object-fit:cover;width:100%;height:100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gitmain">
+                        <div id="gitlink1" style="display:grid;position:relative;">
+                            <div id="gitlink2" style="display:grid;position:relative;grid-area:2 / 2 / 3 / 3;">
+                                <div id="gitlink3" style="z-index:2;">
+                                    <div id="gitlink4" style="padding-top:32.25037901%;transform:rotate(0deg);">
+                                        <div id="gitlink5" style="top:0px;left:0px;width:100%;position:absolute;height:100%;">
+                                            <a id="gitlink" target="_blank" rel="noopener" href="https://github.com/Naveenkuupireddy/ASE-PROJECT" style="pointer-events:all;">
+                                                <svg id="gitcoord" viewBox="0 0 468.1981 150.9957" style="overflow:hidden;top:0%;left:0%;background:url(&#x27;&#x27;);width:100%;position:absolute;opacity:1.0;height:100%;">
+                                                    <defs>
+                                                        <lineargradient id="bgcoord1" gradientUnits="userSpaceOnUse" x1="0" y1="75.5" x2="469" y2="75.5">
+                                                            <stop offset="0%" stop-color="#0cc0df" stop-opacity="1"></stop>
+                                                            <stop offset="100%" stop-color="#ffde59" stop-opacity="1"></stop>
+                                                        </lineargradient>
+                                                    </defs>
+                                                    <g id="bgcoordmain" style="transform:scale(1, 1);">
+                                                        <path id="bgcoord" d="M468.1981090048679,75.49783118570218 C468.1981090048679,117.255664525597 434.46809801853976,
+                                                        150.99566238936654 392.84810290135226,150.99566238936654 L75.3499984741211,150.99566238936654 C33.72999954223633,
+                                                        150.99566238936654 0.0,117.255664525597 0.0,75.49783118570218 C0.0,33.72999954223633 33.72999954223633,
+                                                        0.0 75.3499984741211,0.0 L392.84810290135226,0.0 C434.4581187704929,0.0 468.1981090048679,33.72999954223633 468.1981090048679,
+                                                        75.49783118570218" fill="url(#bgcoord1)"></path>
+                                                    </g>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="link1" style="z-index:3;pointer-events:none;">
+                                    <div id="link2" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                                        <div id="link3" style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
+                                            <p id="G8iTeX6c8bE5SaDR" style="color:#000000;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;text-align:center;">
+                                                <a id="link4" target="_blank" rel="noopener" href="https://github.com/Naveenkuupireddy/ASE-PROJECT" style="text-decoration-line:underline;color:#000000;font-weight:700;pointer-events:all;">Take</a>
+                                                <a id="link5" target="_blank" rel="noopener" href="https://github.com/Naveenkuupireddy/ASE-PROJECT" style="text-decoration-line:underline;color:#000000;white-space:pre-wrap;font-weight:700;pointer-events:all;"></a>
+                                                <a id="link6" target="_blank" rel="noopener" href="https://github.com/Naveenkuupireddy/ASE-PROJECT" style="text-decoration-line:underline;color:#000000;font-weight:700;pointer-events:all;">A Look!</a>
+                                                <br>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="qoutemain" style="z-index:6;">
+                        <div id="qoute6" style="transform:rotate(0deg);width:100%;box-sizing:border-box;height:100%;">
+                            <div id="qoute5" style="flex-direction:column;display:flex;width:100%;justify-content:flex-start;opacity:1.0;height:100%;">
+                                <p id="qoute4" style="color:#000000;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;text-align:center;">
+                                    <span id="qoute3" style="color:#000000;font-weight:600;">&quot;In the face of impending catastrophe, whose warning signs are already unbearably disastrous, weak action is unwise. No action is dangerous.&quot;</span>
+                                    <br>
+                                </p>
+                                <p id="qoute2" style="color:#000000;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;text-align:center;">
+                                    <span id="autor1" style="color:#000000;font-weight:700;">—William Ruto</span>
+                                    <br>
+                                </p>
+                                <p id="qoute_1" style="text-transform:none;color:#000000;white-space:pre;letter-spacing:-0.02em;font-family:YAEnTBpkzlo-0;line-height:1.05em;text-align:center;">
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script src="js/main.js" async="" nonce="192555cd-0d38-4154-8eda-e455b043bbac"></script>
+        </div>
+        <!-- <script nonce="192555cd-0d38-4154-8eda-e455b043bbac">
+            const lang = navigator.language ? navigator.language : 'en';
+            fetch('_footer?lang=' + encodeURIComponent(lang)).then(response=>{
+                response.text().then(footerStr=>{
+                    const div = document.createElement('div');
+                    div.innerHTML = footerStr;
+                    for (const child of [...div.children]) {
+                        if (child.tagName.toLowerCase() !== 'script') {
+                            document.body.append(child);
+                        }
+                    }
+
+                    (()=>{
+                        !function() {
+                            "use strict";
+                            const e = document.getElementById("modal_backdrop")
+                              , t = document.getElementById("report_form")
+                              , o = document.getElementById("report_button")
+                              , n = document.getElementById("form_report")
+                              , c = document.getElementById("form_cancel")
+                              , s = document.getElementById("form_submit_reason")
+                              , a = document.getElementById("form_go_back")
+                              , d = document.getElementById("form_submit_captcha")
+                              , l = document.getElementById("form_close")
+                              , i = document.getElementById("report_reason_0")
+                              , r = document.getElementById("error_message")
+                              , m = document.getElementById("error_message_captcha")
+                              , u = [document.getElementById("form_step_terms"), document.getElementById("form_step_report_reason"), document.getElementById("form_step_captcha"), document.getElementById("form_step_success")];
+                            function p() {
+                                e.classList.remove("active"),
+                                t.classList.remove("active"),
+                                o.classList.remove("active"),
+                                o.focus()
+                            }
+                            function E(e) {
+                                u.forEach(((t,o)=>{
+                                    t.style.display = o === e ? "block" : "none"
+                                }
+                                ))
+                            }
+                            let _, y = !1;
+                            const f = "NETEASE" === window.C_CAPTCHA_IMPLEMENTATION ? ()=>_ : ()=>{
+                                const e = t.elements.namedItem("g-recaptcha-response");
+                                return null == e ? void 0 : e.value
+                            }
+                            ;
+                            e.onclick = p,
+                            c.onclick = p,
+                            l.onclick = p,
+                            o.onclick = function() {
+                                u.forEach(((e,t)=>{
+                                    e.style.display = 0 === t ? "block" : "none"
+                                }
+                                )),
+                                e.classList.add("active"),
+                                t.classList.add("active"),
+                                o.classList.add("active"),
+                                i.checked = !0,
+                                setTimeout((()=>{
+                                    i.focus()
+                                }
+                                ), 350)
+                            }
+                            ,
+                            n.onclick = ()=>E(1),
+                            s.onclick = ()=>{
+                                E(2),
+                                function() {
+                                    if (y)
+                                        return;
+                                    const e = document.createElement("script");
+                                    console.log("our window captcha: ", window.C_CAPTCHA_IMPLEMENTATION, window.C_CAPTCHA_KEY),
+                                    e.src = "NETEASE" === window.C_CAPTCHA_IMPLEMENTATION ? "https://cstaticdun.126.net/load.min.js" : "https://www.google.com/recaptcha/api.js",
+                                    e.async = !0,
+                                    e.defer = !0,
+                                    document.head.appendChild(e),
+                                    y = !0,
+                                    e.onload = "NETEASE" === window.C_CAPTCHA_IMPLEMENTATION ? ()=>{
+                                        var e;
+                                        null === (e = window.initNECaptcha) || void 0 === e || e.call(window, {
+                                            captchaId: window.C_CAPTCHA_KEY,
+                                            element: "#netease-captcha",
+                                            protocol: "https",
+                                            width: "auto",
+                                            onVerify: (e,t)=>{
+                                                _ = t.validate
+                                            }
+                                        })
+                                    }
+                                    : ()=>{}
+                                }()
+                            }
+                            ,
+                            a.onclick = ()=>E(1),
+                            t.addEventListener("submit", (function(e) {
+                                e.preventDefault(),
+                                r.style.display = "none",
+                                m.style.display = "none";
+                                const t = function() {
+                                    let e = "";
+                                    const t = document.getElementsByName("report_reason");
+                                    for (let o = 0; o < t.length; o++) {
+                                        const n = t[o];
+                                        !0 === n.checked && (e = n.value)
+                                    }
+                                    return e
+                                }()
+                                  , o = f();
+                                if (!o)
+                                    return void (m.style.display = "block");
+                                const n = {
+                                    reason: t,
+                                    challenge: o
+                                }
+                                  , c = window.location.origin + window.location.pathname + "/_api/report";
+                                d.classList.add("loading"),
+                                fetch(c, {
+                                    method: "POST",
+                                    body: JSON.stringify(n),
+                                    headers: {
+                                        "Content-Type": "application/json; charset=utf-8"
+                                    }
+                                }).then((e=>{
+                                    d.classList.remove("loading"),
+                                    e.ok ? E(3) : r.style.display = "block"
+                                }
+                                ))
+                            }
+                            ))
+                        }();
+                    }
+                    )();
+                    window.dispatchEvent(new Event('resize'));
+                }
+                );
+            }
+            ); -->
+        </script>
+    </body>
+</html>
